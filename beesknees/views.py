@@ -14,7 +14,7 @@ from rest_framework import status
 def exercise_list(request, format=None):
 
     if request.method == 'GET':
-        exercises = Exercise.objects.all()
+        exercises = Exercise.objects.all().order_by('id')
         serializer = ExerciseSerializer(exercises, many=True)
         return Response(serializer.data)
 

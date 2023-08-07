@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'beesknees',
     'rest_framework',
     'corsheaders',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
