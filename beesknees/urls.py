@@ -24,8 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('exercises/', views.exercise_list),
     path('exercises/<int:id>', views.exercise_detail),
-    path('user/', views.user),
-    path('user/<int:id>', views.user_detail),
+    path('users/', views.user),
+    path('users/<int:id>', views.user_detail),
     path('entry/', views.entry),
     path('entry/<int:id>', views.entry_detail),
 
