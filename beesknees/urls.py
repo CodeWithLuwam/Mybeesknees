@@ -26,8 +26,8 @@ urlpatterns = [
     path('exercises/<int:id>', views.exercise_detail),
     path('users/', views.user),
     path('users/<int:id>', views.user_detail),
-    path('entry/', views.entry),
-    path('entry/<int:id>', views.entry_detail),
+    path('entries/', views.entry),
+    path('entries/<int:id>', views.entry_detail),
 
 ]
 

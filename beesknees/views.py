@@ -96,9 +96,13 @@ def entry(request, format=None):
 
     if request.method == 'POST':
         serializer = EntrySerializer(data=request.data)
+        # print(serializer)
         if serializer.is_valid():
+            # print("inside of serializer") 
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print(serializer.errors)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def entry_detail(request, id, format=None):
