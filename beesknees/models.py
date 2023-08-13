@@ -14,7 +14,7 @@ class Entry(models.Model):
     date=models.CharField(max_length=20)
     sets=models.CharField(max_length=20)
     reps_or_mins=models.CharField(max_length=20) 
-    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="entries")
+    user=models.ForeignKey(User, on_delete=models.CASCADE,  related_name="entries") #null=True,)
     exercise=models.ForeignKey(Exercise, on_delete=models.CASCADE)
     # User.objects.filter(article__pk=1)
 

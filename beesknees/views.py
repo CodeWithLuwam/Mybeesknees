@@ -96,7 +96,11 @@ def entry(request, format=None):
         return Response(serializer.data)
 
     if request.method == 'POST':
+        # dataid = request.data.copy() 
+        # dataid["user"] = request.user
+        # serializer = EntrySerializer(data=dataid)
         serializer = EntrySerializer(data=request.data)
+
         # print(serializer)
         if serializer.is_valid():
             # print("inside of serializer") 
