@@ -28,7 +28,8 @@ urlpatterns = [
     path('users/<int:id>', views.user_detail),
     path('entries/', views.entry),
     path('entries/<int:id>', views.entry_detail),
-
+    # URL pattern that maps to the function populate_database inside views.py
+    path('exercises/populate', views.populate_database)
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
