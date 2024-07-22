@@ -7,18 +7,60 @@ from .serializers import EntrySerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from .populate import data
 
 #get all the exercises
 #serialize them
 #return json
 
+#decorator from Django Rest Framework. 
+#Indicates this view should only respond to GET requests.
+@api_view(['GET'])
+    #loop over data
+        #pass each piece of data to serializer
+        #if serializer is valid:
+            #save to database
 
+ #function that populates the database
+ # will be called when a GET request is made to corresponding URL           
+def populate_database(request):
+    try:
+        for i in data: #data is imported from populate.py
+            # a new ExerciseSerializer instance is created for each item in data
+            #serializer is used to convert the Python dictionary i into a format that can be saved to the database.
+            serializer = ExerciseSerializer(data=i)
+            if serializer.is_valid():
+                #If data is valid,save it to the database.
+                #creates a new Exercise object (or updates an existing one
+                serializer.save()
+        #If all items are processed without any errors...
+        return Response("Success!!")
+    
+    except:
+        return Response("Encountered Error during population")
 
+# this view can handle both GET and POST requests
 @api_view(['GET', 'POST'])
+#optional format parameter
 def exercise_list(request, format=None):
 
     if request.method == 'GET':
+        #retrieves all Exercise objects from the database, ordered by their id
         exercises = Exercise.objects.all().order_by('id')
+        #check if data is empty
+        if not exercises.exists():
+            #If database is empty,loop over each item in the data list (imported from populate.py)
+            for i in data:
+                #For each item, create a serializer
+                serializer = ExerciseSerializer(data=i)
+                if serializer.is_valid():
+                    serializer.save()
+
+                #Get all the Exercise objects from the database and sort 
+                # them by their id in ascending order
+                exercises = Exercise.objects.all().order_by('id')
+        #creates a serializer for all the exercises. 
+        # many=True argument indicates we're serializing multiple objects.
         serializer = ExerciseSerializer(exercises, many=True)
         return Response(serializer.data)
 
